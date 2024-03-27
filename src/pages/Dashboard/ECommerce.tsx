@@ -9,6 +9,7 @@ import TableOne from '../../components/Tables/TableOne';
 import DefaultLayout from '../../layout/DefaultLayout';
 import axios from '../../services/api.ts';
 import {  IconeGateway, IconeSensor, IconeNotification } from "../../components/icons";
+import https from 'https';
 
 
 const ECommerce: React.FC = () => {
@@ -17,8 +18,14 @@ const ECommerce: React.FC = () => {
   const [qtdGateways,setQtdGateways] = React.useState(0);
   const [qtdNotifications,setQtdNotifications] = React.useState(0);
 
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  })
+
   useEffect(() => {
-     axios.get("reports")
+     axios.get("reports",{
+      httpsAgent: agent,
+    })
       .then((res) => {          
         setQtdGateways(res.data.totalGateway);
         setQtdSensor(res.data.totalSensor);

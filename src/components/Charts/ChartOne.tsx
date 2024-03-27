@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from '../../services/api.ts';
 import Loader from '../../common/Loader';
+import https from 'https';
 
 
 const ChartOne: React.FC = () => {
@@ -115,10 +116,15 @@ const ChartOne: React.FC = () => {
     },
   };
 
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  })
 
   useEffect(() => {
     setLoading(false)
-    axios.get("reports")
+    axios.get("reports",{
+      httpsAgent: agent,
+    })
       .then((res) => {
         setData(res.data.Sensordata.Data);
       });

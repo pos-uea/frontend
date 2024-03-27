@@ -2,6 +2,7 @@ import { ApexOptions } from 'apexcharts';
 import React, { useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from '../../services/api.ts';
+import https from 'https';
 
 const ChartTwo: React.FC = () => {
 
@@ -87,8 +88,14 @@ const ChartTwo: React.FC = () => {
     },
   };
 
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  })
+
   useEffect(() => {
-    axios.get("reports")
+    axios.get("reports",{
+      httpsAgent: agent,
+    })
       .then((res) => {
         setData(res.data.SensorDataGroupByWeek.Data);
         setDataNotification(res.data.NotificationGroupByWeek.Data);
