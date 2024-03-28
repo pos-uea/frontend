@@ -8,28 +8,22 @@ import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import DefaultLayout from '../../layout/DefaultLayout';
 import axios from '../../services/api.ts';
-import {  IconeGateway, IconeSensor, IconeNotification } from "../../components/icons";
-import https from 'https';
-
+import { IconeGateway, IconeSensor, IconeNotification } from "../../components/icons";
 
 const ECommerce: React.FC = () => {
 
-  const [qtdSensor,setQtdSensor] = React.useState(0);
-  const [qtdGateways,setQtdGateways] = React.useState(0);
-  const [qtdNotifications,setQtdNotifications] = React.useState(0);
+  const [qtdSensor, setQtdSensor] = React.useState(0);
+  const [qtdGateways, setQtdGateways] = React.useState(0);
+  const [qtdNotifications, setQtdNotifications] = React.useState(0);
 
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  })
 
   useEffect(() => {
-     axios.get("reports",{
-      httpsAgent: agent,
-    })
-      .then((res) => {          
+
+    axios.get("reports")
+      .then((res) => {
         setQtdGateways(res.data.totalGateway);
         setQtdSensor(res.data.totalSensor);
-        setQtdNotifications(res.data.totalNotification);  
+        setQtdNotifications(res.data.totalNotification);
       });
   }, []);
 
@@ -40,10 +34,10 @@ const ECommerce: React.FC = () => {
           {IconeSensor}
         </CardDataStats>
         <CardDataStats title="Total Gateways" total={qtdGateways.toString()} rate="online" levelUp>
-           {IconeGateway}
+          {IconeGateway}
         </CardDataStats>
         <CardDataStats title="Total Notifications" total={qtdNotifications.toString()} rate="online" levelUp>
-            {IconeNotification}
+          {IconeNotification}
         </CardDataStats>
         <CardDataStats title="Total Users" total="3.456" rate="0.95%" levelDown>
           <svg
@@ -71,7 +65,7 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne  />
+        <ChartOne />
         <ChartTwo />
         <ChartThree />
         <MapOne />

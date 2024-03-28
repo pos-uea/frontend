@@ -2,7 +2,7 @@ import { ApexOptions } from 'apexcharts';
 import React, { useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from '../../services/api.ts';
-import https from 'https';
+
 
 const ChartThree: React.FC = () => {
 
@@ -52,14 +52,9 @@ const ChartThree: React.FC = () => {
     ],
   };
 
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  })
 
   useEffect(() => {
-    axios.get("reports",{
-      httpsAgent: agent,
-    })
+    axios.get("reports")
       .then((res) => {
         setData(res.data.SensorDataSinteticValuesMonth.Data[0].values);
         setText(res.data.SensorDataSinteticValuesMonth.Data[0].texts);
