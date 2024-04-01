@@ -7,7 +7,7 @@ const ChartTwo: React.FC = () => {
 
   const [data, setData] = React.useState([]);
   const [dataNotification, setDataNotification] = React.useState([]);
- 
+
   const options: ApexOptions = {
     colors: ['#3C50E0', '#80CAEE'],
     chart: {
@@ -101,9 +101,9 @@ const ChartTwo: React.FC = () => {
 
     for ( var i = 0; i < a.length; i++ ) {
         for ( var e = 0; e < b.length; e++ ) {
-            ( a[i]._id === b[e]._id ) ? matches.push( b[e].qtd ) : matches.push(0)
+            ( a[i]._id === b[e]._id ) ? matches.push( b[e].qtd ) : 0;
         }
-    }
+    }    
     return matches;
   }
 

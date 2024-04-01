@@ -4,7 +4,7 @@ import ReactApexChart from 'react-apexcharts';
 import axios from '../../services/api.ts';
 import Loader from '../../common/Loader';
 
-const ChartOne: React.FC = () => {
+const ChartOne: React.FC = (dataX) => {
 
   const [loading, setLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState([]);
@@ -115,11 +115,12 @@ const ChartOne: React.FC = () => {
   };
 
   useEffect(() => {
-    setLoading(false)
-    axios.get("reports")
-      .then((res) => {
-        setData(res.data.Sensordata.Data);
-      });
+      setLoading(false)
+      axios.get("reports/analytics/day")
+        .then((res) => {
+          setData(res.data.SensordataDay.Data);
+        });
+
   }, []);
 
   async function handleDay(e: any) {
