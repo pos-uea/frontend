@@ -4,7 +4,7 @@ import ReactApexChart from 'react-apexcharts';
 import axios from '../../services/api.ts';
 import Loader from '../../common/Loader';
 
-const ChartOne: React.FC = (dataX) => {
+const ChartOne: React.FC = () => {
 
   const [loading, setLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState([]);
